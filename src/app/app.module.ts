@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {RouterModule} from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
@@ -17,10 +17,17 @@ import { CurrentUserComponent } from './main-page/current-user/current-user.comp
     SearchChatComponent,
     ChatListComponent,
     CurrentChatComponent,
-    CurrentUserComponent
+    CurrentUserComponent,
+
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot([
+      {path:'',component: HomePageComponent },
+      {path:'home', component: MainPageComponent},
+
+
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
