@@ -1,0 +1,14 @@
+<div id="contacts">
+  <ul>
+    <li class="contact " *ngFor="let chat of chats">
+      <div class="wrap">
+        <span class="contact-status online"></span>
+        <img src="{{chat.imageUrl}}" alt="" />
+        <div class="meta">
+          <p class="name">{{chat.name}}</p>
+          <p class="preview">{{chat.message}}</p>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
