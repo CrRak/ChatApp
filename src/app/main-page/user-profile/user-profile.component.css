@@ -1,0 +1,21 @@
+.modal-title{
+  font-weight: bold;
+  margin-left: 150px;
+  font-size: 30px;
+}
+.modal-image{
+  border-radius: 50%;
+  width: 50%;
+  margin-left: 115px;
+}
+.modal-description{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+  margin-top: 40px;
+  text-align: justify;
+  color: cornflowerblue;
+}
+.modal-emailId{
+  color: cornflowerblue;
+
+}

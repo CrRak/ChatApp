@@ -8,6 +8,7 @@ import { SearchChatComponent } from './main-page/search-chat/search-chat.compone
 import { ChatListComponent } from './main-page/chat-list/chat-list.component';
 import { CurrentChatComponent } from './main-page/current-chat/current-chat.component';
 import { CurrentUserComponent } from './main-page/current-user/current-user.component';
+import { UserProfileComponent } from './main-page/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +19,14 @@ import { CurrentUserComponent } from './main-page/current-user/current-user.comp
     ChatListComponent,
     CurrentChatComponent,
     CurrentUserComponent,
+    UserProfileComponent,
 
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
       {path:'',component: HomePageComponent },
-      {path:'home', component: MainPageComponent},
+      {path:'home', component: MainPageComponent}
 
 
     ])
