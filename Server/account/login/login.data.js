@@ -1,29 +1,19 @@
 const ResponseCode = require('../../common/enums/LoginResponse');
-const { MongoClient } = require('mongodb');
-
-const uri = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false";
-
-const client = new MongoClient(uri);
-
+const client = require('../../common/dbclient').client;
 
 async function loginUser(user){
 
-    try {
-        // Connect to the MongoDB cluster
-        await client.connect();
- 
-        // Make the appropriate DB calls
-        await  listDatabases(client);
+   try{
+        var result = await client.db("test").collection('userInfo').findOne({email: user.email, password: user.password});
+        if(result == null) return {result: ResponseCode.InvalidCredentials};
+        else return {result: ResponseCode.Success, user: result};
  
     } catch (e) {
         console.error(e);
-    } finally {
-        await client.close();
+        return {result: ResponseCode.InvalidCredentials};
+
     }
 
-    // --------------------- User registeration logic -------------------------
-    var resUser = {id: 1, name: "Prakhar Londhe", email: "plondhe@in.com"}
-    return {result: ResponseCode.Success, user: resUser};
 }
 
 async function listDatabases(client){

@@ -4,6 +4,9 @@ const path = require('path');
 const app = express();
 const registerRouter = require('./Server/account/register/router');
 const loginRouter = require('./Server/account/login/router');
+const dbclient = require('./Server/common/dbclient');
+
+dbclient.connect();
 
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/ChatApp'));

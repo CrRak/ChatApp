@@ -1,8 +1,18 @@
 const ResponseCode = require('../../common/enums/RegisterResponse');
+const client = require('../../common/dbclient').client;
 
-function registerUser(user){
+async function registerUser(user){
     // --------------------- User registeration logic -------------------------
-    return ResponseCode.Success;
+    try {
+        const result = await client.db("test").collection("userInfo").insertOne(user);
+        console.log(`New User created with the following id: ${result.insertedId}`);
+        return {result: ResponseCode.Success, insertedId: result.insertedId};
+ 
+    } catch (e) {
+        console.error(e);
+        return {result: ResponseCode.DuplicateEmail};
+    }
+
 }
 
 module.exports = {
