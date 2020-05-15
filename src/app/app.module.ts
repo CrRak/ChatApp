@@ -9,7 +9,8 @@ import { ChatListComponent } from './main-page/chat-list/chat-list.component';
 import { CurrentChatComponent } from './main-page/current-chat/current-chat.component';
 import { CurrentUserComponent } from './main-page/current-user/current-user.component';
 import { UserProfileComponent } from './main-page/user-profile/user-profile.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule} from '@angular/forms'
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,12 +25,15 @@ import { UserProfileComponent } from './main-page/user-profile/user-profile.comp
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     RouterModule.forRoot([
       {path:'',component: HomePageComponent },
       {path:'home', component: MainPageComponent}
 
 
-    ])
+    ]),
+    HttpClientModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

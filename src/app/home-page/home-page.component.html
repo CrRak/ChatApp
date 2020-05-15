@@ -20,16 +20,16 @@
   <div class="row justify-content-center" style="padding-top: 70px;">
     <div class="col-md-4" >
       <div class="left" style="padding-right: 150px;">
-        <form>
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm )">
           <div class="form-group">
             <label for="loginMailId">Email address</label>
-            <input type="email" class="form-control" id="loginMailId" name="loginMailId" >
+            <input type="email" class="form-control" id="loginMailId" name="loginMailId" ngModel >
           </div>
           <div class="form-group">
             <label for="loginPassword">Password</label>
-            <input type="password" class="form-control" id="loginPassword" name="loginPassword">
+            <input type="password" class="form-control" id="loginPassword" name="loginPassword" ngModel>
           </div>
-          <button type="submit" class="btn btn-primary" [routerLink]="['/home']">Login</button>
+          <button type="submit" class="btn btn-primary" >Login</button>
         </form>
       </div>
     </div>
