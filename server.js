@@ -5,7 +5,17 @@ const app = express();
 const registerRouter = require('./Server/account/register/router');
 const loginRouter = require('./Server/account/login/router');
 const dbclient = require('./Server/common/dbclient');
+const http = require('http').createServer(app);
+const socketio_service = require('./Server/common/socketio-service');
+const socketio = require('socket.io')(http);
 
+// Initialize Server socket for service
+socketio_service.initializeServerSocket(socketio);
+
+socketio.on('connect', (socket) => {
+})
+
+// Connect to MongoDB client
 dbclient.connect();
 
 // Serve only the static files form the dist directory
@@ -34,6 +44,7 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+
 // Routers 
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
@@ -45,4 +56,6 @@ res.sendFile(path.join(__dirname+'/dist/ChatApp/index.html'));
 });
 
 // Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
+http.listen(process.env.PORT || 8080, () => {
+    console.log("Server started.")
+});
