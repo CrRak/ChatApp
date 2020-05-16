@@ -11,8 +11,9 @@ export class UserProfileComponent implements OnInit {
   description="I am Litt, I love my owner cum best friend Loius.";
   emailId="mikadolitt@bagelislove.com";
   constructor() { }
-
-  ngOnInit() {
+  currentUser
+  ngOnInit(){
+    this.currentUser= JSON.parse(localStorage.getItem("user"));
   }
 
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { WebSocketService } from 'src/app/services/web-socket.service';
 
 @Component({
   selector: 'app-current-chat',
@@ -6,10 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./current-chat.component.css']
 })
 export class CurrentChatComponent implements OnInit {
-
-  constructor() { }
+  @Input() chat;
+  messageText
+  currentUser
+  constructor(private webSocketService: WebSocketService) { }
 
   ngOnInit() {
+    this.currentUser= JSON.parse(localStorage.getItem("user"));
+  }
+  sendMessage(){
+    this.webSocketService.emit("message", {
+      fromId: this.currentUser._id,
+      toId: "user2",
+      message: this.messageText
+    })
+    this.messageText=''
+
+
   }
 
   msgs: any=[

@@ -8,12 +8,12 @@
         <a href="#" data-toggle="modal" data-target="#myModal"><app-current-user></app-current-user></a>
       </div>
       <div class="row" style=" height:500px;">
-        <app-chat-list></app-chat-list>
+        <app-chat-list (chatClicked)="childChatClicked($event)"></app-chat-list>
       </div>
     </div>
     <div class="col-md-9">
       <div class="row" style="background-color: #d1c4e9; height:auto;">
-        <app-current-chat></app-current-chat>
+        <app-current-chat [chat]="clickedChat"></app-current-chat>
 
       </div>
 

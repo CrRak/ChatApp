@@ -10,12 +10,14 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">{{this.name}}</h4>
+          <h4 class="modal-title">{{currentUser.name}}</h4>
         </div>
         <div class="modal-body">
-          <img class="modal-image" src='{{this.imageUrl}}' /><br>
-          <p class="modal-description">{{this.description}}</p>
-          <p class="modal-emailID">Email ID: {{this.emailId}}</p>
+          <img *ngIf="currentUser.image" class="modal-image" src='{{currentUser.image}}' /><br>
+          <img *ngIf="!currentUser.image" class="modal-image" src='http://emilcarlsson.se/assets/louislitt.png'/><br>
+          <p *ngIf="currentUser.status" class="modal-description">{{currentUser.status}}</p>
+          <p *ngIf="!currentUser.status"> Hello there, I am using ChatApp </p>
+          <p class="modal-emailID">Email ID: {{currentUser.email}}</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

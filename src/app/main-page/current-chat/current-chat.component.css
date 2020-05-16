@@ -93,34 +93,30 @@
 .content .message-input .wrap input {
   font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
   float: left;
-
-  width: calc(100% - 90px);
+  border-radius: 30px;
+  width: 900px;
   padding: 11px 32px 10px 8px;
-  font-size: 0.8em;
+  font-size: 0.9em;
   color: #32465a;
+  margin-bottom: 10px;
+
 }
 .content .message-input .wrap input {
   padding: 15px 32px 16px 8px;
 }
-.content .message-input .wrap input:focus {
+.content .message-input .wrap input:focus{
   outline: none;
 }
 
-
 .content .message-input .wrap button {
-  float: right;
-
-  width: 50px;
-
+  border-radius: 150px;
   cursor: pointer;
-  background-color: cornflowerblue;
-
-
+  background-color: #ae52d4;
+  margin-top: 10px;
+  margin-left: 10px;
 }
-.content .message-input .wrap button {
-  padding: 16px 0;
-}
+
 .content .message-input .wrap button:hover {
-  background: #435f7a;
+  background: cornflowerblue;
 }
 

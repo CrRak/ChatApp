@@ -20,36 +20,46 @@
   <div class="row justify-content-center" style="padding-top: 70px;">
     <div class="col-md-4" >
       <div class="left" style="padding-right: 150px;">
-        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm )">
+        <form #loginForm="ngForm" (ngSubmit)="onLoginSubmit(loginForm )">
           <div class="form-group">
             <label for="loginMailId">Email address</label>
-            <input type="email" class="form-control" id="loginMailId" name="loginMailId" ngModel >
+            <em *ngIf="!loginForm.controls.email?.valid && (loginForm.controls.email?.touched || mouseoverLogin)">Required</em>
+            <input (ngModel)="loginMailId" type="email" class="form-control" id="loginMailId" name="email" required >
           </div>
           <div class="form-group">
             <label for="loginPassword">Password</label>
-            <input type="password" class="form-control" id="loginPassword" name="loginPassword" ngModel>
+            <em *ngIf="!loginForm.controls.password?.valid && (loginForm.controls.password?.touched || mouseoverLogin)">Required</em>
+            <input (ngModel)="loginPassword" type="password" class="form-control" id="loginPassword" name="password" required>
           </div>
-          <button type="submit" class="btn btn-primary" >Login</button>
+          <span (mouseenter)="mouseoverLogin=true" (mouseleave)="mouseoverLogin=false">
+          <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary" >Login</button>
+        </span>
         </form>
       </div>
     </div>
     <div class="col-md-4">
       <div class="right" style="padding-left: 150px;">
-        <form>
+        <form #registerForm="ngForm" (ngSubmit)="onRegisterSubmit(registerForm)">
           <div class="form-group">
+
             <label for="registerName">Name</label>
-            <input type="text" class="form-control" id="registerName" name="registerName">
+            <em *ngIf="!registerForm.controls.name?.valid && (registerForm.controls.name?.touched || mouseoverRegister)">Required</em>
+            <input type="text" (ngModel)="registerName" class="form-control" id="registerName" name="name"  required>
+
           </div>
           <div class="form-group">
             <label for="registerMailId">Email address</label>
-            <input type="email" class="form-control" id="registerMailId" name="registerMailId" >
+            <em *ngIf="!registerForm.controls.email?.valid && (registerForm.controls.email?.touched || mouseoverRegister)">Required</em>
+            <input type="email" (ngModel)="registerMailId" class="form-control" id="registerMailId" name="email" required>
           </div>
           <div class="form-group">
             <label for="registerPassword">Password</label>
-            <input type="password" class="form-control" id="registerPassword" name="registerPassword">
+            <em *ngIf="!registerForm.controls.password?.valid && (registerForm.controls.password?.touched || mouseoverRegister)">Required</em>
+            <input type="password" (ngModel)="registerPassword" class="form-control" id="registerPassword" name="password" required>
           </div>
-
-          <button type="submit" [routerLink]="['/home']" class="btn btn-primary">Register</button>
+          <span (mouseenter)="mouseoverRegister=true" (mouseleave)="mouseoverRegister=false">
+          <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary">Register</button>
+        </span>
         </form>
       </div>
     </div>

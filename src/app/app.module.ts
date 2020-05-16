@@ -10,7 +10,8 @@ import { CurrentChatComponent } from './main-page/current-chat/current-chat.comp
 import { CurrentUserComponent } from './main-page/current-user/current-user.component';
 import { UserProfileComponent } from './main-page/user-profile/user-profile.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule} from '@angular/forms'
+import { FormsModule} from '@angular/forms';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +34,7 @@ import { FormsModule} from '@angular/forms'
 
     ]),
     HttpClientModule,
+    AngularFontAwesomeModule
 
   ],
   providers: [],

@@ -7,10 +7,15 @@ import { UserProfileComponent } from './user-profile/user-profile.component'
 })
 export class MainPageComponent implements OnInit {
 
-
+  public clickedChat: any;
   constructor() { }
 
   ngOnInit() {
+
+  }
+  childChatClicked(chat){
+    this.clickedChat= chat;
+
   }
 
 }
