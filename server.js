@@ -12,8 +12,6 @@ const socketio = require('socket.io')(http);
 // Initialize Server socket for service
 socketio_service.initializeServerSocket(socketio);
 
-socketio.on('connect', (socket) => {
-})
 
 // Connect to MongoDB client
 dbclient.connect();
