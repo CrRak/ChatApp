@@ -1,20 +1,23 @@
 let io = undefined;
-const db = require('./dbclient');
+const dbclient = require('./dbclient').client;
 
+// Stores all users in {userId: socket} format
 const onlineUsers = [];
 
+// Gets the socket connection object
 function getSocketFromObject(obj){
     if(obj) return Object.values(obj)[0];
     else return undefined;
 }
 
+// Gets the userId from onlineUsers matching certain condition
 function getUserFromObject(obj){
     if(obj) return Object.keys(obj)[0];
     else return undefined;
 }
 
-function initializeServerSocket(socket){
-    io = socket;
+function initializeServerSocket(server_socket){
+    io = server_socket;
     console.log('Socket.io Server Socket initialized successfully.');
 
     // Listen for socket connection event
@@ -35,7 +38,7 @@ function initializeServerSocket(socket){
         })
 
         // Tackling incoming message from user
-        socket.on('message', (data) => {
+        socket.on('message', async (data) => {
 
             // Find the user socket for the user message was sent to.
             const user_and_socket = onlineUsers.find((user_socket) => {
@@ -48,16 +51,46 @@ function initializeServerSocket(socket){
             if( user_socket ){
                 user_socket.emit('message', data);
             }
-
-            // TODO : Insert the message into database.
-            
+            try{
+                // Inserts the message into database.
+                await addChatMessageToDb(data);
+            } catch(e){
+                console.log(`---- Error occured in updating database in socketio-service : ${e}`)
+            }
             console.log(`-- Got Message from user with data : ${data}`);
         })
     });
 }
 
+async function addChatMessageToDb(data){
+    var newMessage = formatMessageForDb(data.fromUserId, data.message);
+    
+    // Inserts the new message into database for the conversation
+    // Creates a new document if the conversation doesn't exist.
+    await dbclient.db('test')
+        .collection('chatInfo')
+        .updateOne({
+            $or: [
+                { $and: [{ user1ID: data.fromUserId }, { user2ID: data.toUserId }] },
+                { $and: [{ user2ID: data.fromUserId }, { user1ID: data.toUserId }] }
+            ]
+        }, {$push: {messages: newMessage}, $setOnInsert: {
+            user1ID: data.fromUserId,
+            user2ID: data.toUserId
+        }}, {upsert: true});
+}
+
+function formatMessageForDb(senderId, message){
+    return {
+        senderId: senderId,
+        timestamp: new Date(),
+        content: message
+    };
+}
+
 
 
 module.exports = {
-    initializeServerSocket
+    initializeServerSocket,
+    addChatMessageToDb
 }
