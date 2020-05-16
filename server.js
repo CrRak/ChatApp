@@ -43,7 +43,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-// Routers 
+// Routers
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 

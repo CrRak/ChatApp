@@ -14,58 +14,57 @@ export class CurrentChatComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser= JSON.parse(localStorage.getItem("user"));
+    this.webSocketService.emit("init",{userId: this.currentUser._id});
+    this.webSocketService.listen("message").subscribe((data:any) => {
+      this.msgs.push({
+        "status":"received",
+        "message": data.message,
+        "imageUrl": "http://emilcarlsson.se/assets/mikeross.png"
+      })
+    })
   }
   sendMessage(){
+    console.log(this.chat.id)
     this.webSocketService.emit("message", {
-      fromId: this.currentUser._id,
-      toId: "user2",
+      fromUserId: this.currentUser._id,
+      toUserId: this.chat.id,
       message: this.messageText
     })
+    this.msgs.push({
+      "status":"sent",
+      "message": this.messageText,
+      "imageUrl": "http://emilcarlsson.se/assets/harveyspecter.png"
+    })
     this.messageText=''
-
-
   }
 
   msgs: any=[
-    {"status":"sent",
+    {"status":"received",
     "message":"How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!",
     "imageUrl":"http://emilcarlsson.se/assets/mikeross.png"},
-    {"status":"replies",
+    {"status":"sent",
     "message":"When you're backed against the wall, break the god damn thing down.",
     "imageUrl":"http://emilcarlsson.se/assets/harveyspecter.png"},
-    {"status":"replies",
+    {"status":"sent",
     "message":"Excuses don't win championships.",
     "imageUrl":"http://emilcarlsson.se/assets/harveyspecter.png"},
-    {"status":"sent",
+    {"status":"received",
     "message":"Oh yeah, did Michael Jordan tell you that?",
     "imageUrl":"http://emilcarlsson.se/assets/mikeross.png"},
-    {"status":"replies",
+    {"status":"sent",
     "message":"No, I told him that.",
     "imageUrl":"http://emilcarlsson.se/assets/harveyspecter.png"},
-    {"status":"replies",
+    {"status":"sent",
     "message":"What are your choices when someone puts a gun to your head?",
     "imageUrl":"http://emilcarlsson.se/assets/harveyspecter.png"},
-    {"status":"sent",
+    {"status":"received",
     "message":"What are you talking about? You do what they say or they shoot you.",
     "imageUrl":"http://emilcarlsson.se/assets/mikeross.png"},
-    {"status":"replies",
+    {"status":"sent",
     "message":"Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.",
     "imageUrl":"http://emilcarlsson.se/assets/harveyspecter.png"},
-    {"status":"replies",
-    "message":"Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.",
-    "imageUrl":"http://emilcarlsson.se/assets/harveyspecter.png"},
-    {"status":"replies",
-    "message":"Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.",
-    "imageUrl":"http://emilcarlsson.se/assets/harveyspecter.png"},
-    {"status":"replies",
-    "message":"Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.",
-    "imageUrl":"http://emilcarlsson.se/assets/harveyspecter.png"},
-    {"status":"replies",
-    "message":"Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.",
-    "imageUrl":"http://emilcarlsson.se/assets/harveyspecter.png"},
-    {"status":"replies",
-    "message":"Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.",
-    "imageUrl":"http://emilcarlsson.se/assets/harveyspecter.png"}
+
+
   ]
 
 }

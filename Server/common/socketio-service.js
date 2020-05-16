@@ -35,6 +35,7 @@ function initializeServerSocket(server_socket){
         // Adding user to online Users corresponding to the user ID.
         socket.on('init', (data) => {
             onlineUsers.push({[data.userId]: socket});
+            console.log(onlineUsers)
         })
 
         // Tackling incoming message from user
@@ -64,7 +65,7 @@ function initializeServerSocket(server_socket){
 
 async function addChatMessageToDb(data){
     var newMessage = formatMessageForDb(data.fromUserId, data.message);
-    
+
     // Inserts the new message into database for the conversation
     // Creates a new document if the conversation doesn't exist.
     await dbclient.db('test')

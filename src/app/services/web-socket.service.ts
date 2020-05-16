@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
   providedIn:'root'
 })
 export class WebSocketService{
+currentUser
 
 
     socket : any;
@@ -14,6 +15,7 @@ export class WebSocketService{
 
     constructor(){
       this.socket = io(this.url);
+
     }
 
     listen(eventName: string){

@@ -27,7 +27,7 @@ onLoginSubmit(form: NgForm) {
     if(data.success==true){
 
       localStorage.setItem("user", JSON.stringify(data.user));
-      console.log(localStorage.getItem("user"));
+
       this.route.navigate(['/home']);
     }
     else{
@@ -45,7 +45,7 @@ onRegisterSubmit(form: NgForm) {
       this.route.navigate(['/home']);
     }
     else{
-      alert(data.message)
+      alert(data.message);
 
     }
   });

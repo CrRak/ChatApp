@@ -47,19 +47,19 @@
   font-size: 0.9em;
 }
 
-.content .messages ul li.sent img {
+.content .messages ul li.received img {
   margin: 6px 8px 0 0;
 }
-.content .messages ul li.sent p {
+.content .messages ul li.received p {
 
   background: #ae52d4;
   color: #f5f5f5;
 }
-.content .messages ul li.replies img {
+.content .messages ul li.sent img {
   float: right;
   margin: 6px 0 0 8px;
 }
-.content .messages ul li.replies p {
+.content .messages ul li.sent p {
   background: #f5f5f5;
   float: right;
 }
@@ -109,7 +109,7 @@
 }
 
 .content .message-input .wrap button {
-  border-radius: 150px;
+  border-radius: 50%;
   cursor: pointer;
   background-color: #ae52d4;
   margin-top: 10px;
