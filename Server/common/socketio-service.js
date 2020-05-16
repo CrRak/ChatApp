@@ -16,6 +16,11 @@ function initializeServerSocket(socket){
             const i = onlineUsers.indexOf(socket);
             onlineUsers.splice(i, 1);
         });
+
+        // Tacking incoming message from user
+        socket.on('message', (data) => {
+            console.log(data);
+        })
     });
 }
 
