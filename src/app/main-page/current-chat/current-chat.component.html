@@ -1,17 +1,28 @@
-<div class="content">
+
+  <div class="content">
   <div class="contact-profile">
     <img [src]="chat.imageUrl" alt="" />
-    <p>{{chat.name}}</p>
+    <p>{{chat.name}} </p>
   </div>
-  <div class="messages" >
+
+
+  <div class="messages" id="messageContainer"  >
     <ul>
       <li *ngFor="let msg of msgs" class="{{msg.status}}">
         <img src="{{msg.imageUrl}}" alt="" />
         <p>{{msg.message}}</p>
       </li>
+      <div *ngIf="msgs.length==0" style="padding-top: 150px;">
+
+        <h1 style="text-align: center; color: rgb(89, 67, 150);" > No messages to display </h1>
+        <h5 style="text-align: center; color: rgb(89, 67, 150);">Start a chat NOW</h5>
+      </div>
 
     </ul>
   </div>
+</div>
+
+
   <div class="message-input">
     <div class="wrap">
     <input type="text" placeholder="Write your message..." name="mest" [(ngModel)]="messageText" />
@@ -19,3 +30,4 @@
     <button class="btn btn-primary" (click)="sendMessage()" > <i class="fa fa-paper-plane" aria-hidden="true"></i> </button>
     </div>
   </div>
+

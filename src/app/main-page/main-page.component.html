@@ -1,17 +1,17 @@
-<div style="margin-left: 15px;">
-  <div style="background-color:#4a0072  ; height:50px; margin-left:-16px; " >
+<div>
+  <div class="row" style="background-color:#4a0072  ; height:50px; " >
     <app-search-chat></app-search-chat>
   </div>
-  <div class="row">
-    <div class="col-md-3">
+  <div class="row" style="height:100%;">
+    <div class="col-3">
       <div class="row" style="background-color:#7b1fa2; height:100px;">
         <a href="#" data-toggle="modal" data-target="#myModal"><app-current-user></app-current-user></a>
       </div>
-      <div class="row" style=" height:500px;">
-        <app-chat-list (chatClicked)="childChatClicked($event)"></app-chat-list>
+      <div class="row">
+        <app-chat-list (chatClicked)="childChatClicked($event)" style="height:400px !important;"></app-chat-list>
       </div>
     </div>
-    <div class="col-md-9">
+    <div class="col-9">
       <div class="row" style="background-color: #d1c4e9; height:auto;">
         <app-current-chat [chat]="clickedChat"></app-current-chat>
 

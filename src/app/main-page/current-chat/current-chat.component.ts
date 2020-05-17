@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewChecked } from '@angular/core';
 import { WebSocketService } from 'src/app/services/web-socket.service';
 
 @Component({
@@ -10,6 +10,7 @@ export class CurrentChatComponent implements OnInit {
   @Input() chat;
   messageText
   currentUser
+
   constructor(private webSocketService: WebSocketService) { }
 
   ngOnInit() {
@@ -23,9 +24,18 @@ export class CurrentChatComponent implements OnInit {
       })
     })
   }
+  ngAfterViewChecked(){
+    let container = document.getElementById("messageContainer");
+    console.log("container")
+    container.scrollTop = container.scrollHeight;
+  }
   sendMessage(){
     console.log(this.chat.id)
     this.webSocketService.emit("message", {
+      fromUserName: this.currentUser.name,
+      fromUserImage: this.currentUser.image,
+      toUserName: this.chat.name,
+      toUserImage: this.chat.imageUrl,
       fromUserId: this.currentUser._id,
       toUserId: this.chat.id,
       message: this.messageText
@@ -39,30 +49,30 @@ export class CurrentChatComponent implements OnInit {
   }
 
   msgs: any=[
-    {"status":"received",
-    "message":"How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!",
-    "imageUrl":"http://emilcarlsson.se/assets/mikeross.png"},
-    {"status":"sent",
-    "message":"When you're backed against the wall, break the god damn thing down.",
-    "imageUrl":"http://emilcarlsson.se/assets/harveyspecter.png"},
-    {"status":"sent",
-    "message":"Excuses don't win championships.",
-    "imageUrl":"http://emilcarlsson.se/assets/harveyspecter.png"},
-    {"status":"received",
-    "message":"Oh yeah, did Michael Jordan tell you that?",
-    "imageUrl":"http://emilcarlsson.se/assets/mikeross.png"},
-    {"status":"sent",
-    "message":"No, I told him that.",
-    "imageUrl":"http://emilcarlsson.se/assets/harveyspecter.png"},
-    {"status":"sent",
-    "message":"What are your choices when someone puts a gun to your head?",
-    "imageUrl":"http://emilcarlsson.se/assets/harveyspecter.png"},
-    {"status":"received",
-    "message":"What are you talking about? You do what they say or they shoot you.",
-    "imageUrl":"http://emilcarlsson.se/assets/mikeross.png"},
-    {"status":"sent",
-    "message":"Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.",
-    "imageUrl":"http://emilcarlsson.se/assets/harveyspecter.png"},
+    // {"status":"received",
+    // "message":"How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!",
+    // "imageUrl":"http://emilcarlsson.se/assets/mikeross.png"},
+    // {"status":"sent",
+    // "message":"When you're backed against the wall, break the god damn thing down.",
+    // "imageUrl":"http://emilcarlsson.se/assets/harveyspecter.png"},
+    // {"status":"sent",
+    // "message":"Excuses don't win championships.",
+    // "imageUrl":"http://emilcarlsson.se/assets/harveyspecter.png"},
+    // {"status":"received",
+    // "message":"Oh yeah, did Michael Jordan tell you that?",
+    // "imageUrl":"http://emilcarlsson.se/assets/mikeross.png"},
+    // {"status":"sent",
+    // "message":"No, I told him that.",
+    // "imageUrl":"http://emilcarlsson.se/assets/harveyspecter.png"},
+    // {"status":"sent",
+    // "message":"What are your choices when someone puts a gun to your head?",
+    // "imageUrl":"http://emilcarlsson.se/assets/harveyspecter.png"},
+    // {"status":"received",
+    // "message":"What are you talking about? You do what they say or they shoot you.",
+    // "imageUrl":"http://emilcarlsson.se/assets/mikeross.png"},
+    // {"status":"sent",
+    // "message":"Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.",
+    // "imageUrl":"http://emilcarlsson.se/assets/harveyspecter.png"},
 
 
   ]

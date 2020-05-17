@@ -1,6 +1,5 @@
 <div id="contacts">
-  <ul>
-    <li class="contact" *ngFor="let chat of chats" (click)="openThisChat(chat)">
+    <div class="contact" *ngFor="let chat of chats" (click)="openThisChat(chat)">
       <div class="wrap">
         <span class="contact-status"></span>
         <img src="{{chat.imageUrl}}" alt="" />
@@ -9,6 +8,9 @@
           <p class="preview">{{chat.message}}</p>
         </div>
       </div>
-    </li>
-  </ul>
+    </div>
+    <div *ngIf="chats.length==0" style="padding-top: 150px;">
+
+      <p style="text-align: center;"> No chats to display </p>
+    </div>
 </div>

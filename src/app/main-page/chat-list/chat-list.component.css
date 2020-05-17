@@ -1,38 +1,49 @@
-ul li.contact {
-  position: inherit ;
-  padding: 10px 0 15px 0;
+:host{
+  width: 100% !important;
+}
+
+html{
+  overflow-y: hidden;
+}
+
+#contacts{
+  overflow-y: scroll;
+  width: 100%;
+}
+
+div div.contact {
+
+  padding: 20px;
   font-size: 0.9em;
   cursor: pointer;
-  margin-left: -40px;
-  width: 400px;
+  width: 100%;
   border-bottom:0.5px solid gray;
 }
 
-ul li.contact:hover {
+div div.contact:hover {
   background: #b39ddb;
-  margin-left: -40px;
-  width: 400px;
 }
-ul li.contact.active {
+
+div div.contact.active {
   background: #32465a;
   border-right: 5px solid #435f7a;
 
 }
 
-ul li.contact.active span.contact-status {
+div div.contact.active span.contact-status {
   border: 2px solid #32465a !important;
   width: 100%;
 }
-ul li.contact .wrap {
+div div.contact .wrap {
   width: 100%;
 
   position: relative;
 }
-ul li.contact .wrap {
+div div.contact .wrap {
   width: 100%;
 }
 
-ul li.contact .wrap span {
+div div.contact .wrap span {
   position: absolute;
   left: 0;
   margin: -2px 0 0 -2px;
@@ -42,29 +53,29 @@ ul li.contact .wrap span {
   border: 2px solid #2c3e50;
   background: #95a5a6;
 }
-ul li.contact .wrap span.online {
+div div.contact .wrap span.online {
   background: #2ecc71;
 }
 
 
-ul li.contact .wrap img {
+div div.contact .wrap img {
   width: 40px;
   border-radius: 50%;
   float: left;
   margin-right: 10px;
 }
 
-ul li.contact .wrap img {
+div div.contact .wrap img {
     margin-right: 0px;
 }
- ul li.contact .wrap .meta {
+ div div.contact .wrap .meta {
   padding: 5px 0 0 0;
 }
 
- ul li.contact .wrap .meta .name {
+ div div.contact .wrap .meta .name {
 font-weight: 600;
 }
- ul li.contact .wrap .meta .preview {
+ div div.contact .wrap .meta .preview {
 margin: 5px 0 0 0;
 padding: 0 0 1px;
 font-weight: 400;
@@ -76,7 +87,7 @@ text-overflow: ellipsis;
 -webkit-transition: 1s all ease;
 transition: 1s all ease;
 }
- ul li.contact .wrap .meta .preview span {
+ div div.contact .wrap .meta .preview span {
 position: initial;
 border-radius: initial;
 background: none;

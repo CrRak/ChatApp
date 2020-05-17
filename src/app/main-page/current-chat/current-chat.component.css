@@ -1,3 +1,5 @@
+
+
 .content {
   float: right;
   width: 100%;
@@ -31,10 +33,11 @@
   position: relative;
   overflow-x: hidden;
   overflow-y: scroll;
-  height: auto;
+  height: 450px;
   margin-top: 80px;
   margin-left: -30px;
   margin-right: -20px;
+
 }
 
 
@@ -80,17 +83,18 @@
   max-width: 800px;
 }
 
-.content .message-input {
+ .message-input {
   position: fixed;
   padding-left: 20px;
   bottom: 0;
   width: 100%;
-  z-index: 99;
+  z-index: 0;
+  background-color:#d1c4e9 ;
 }
-.content .message-input .wrap {
+ .message-input .wrap {
   position: relative;
 }
-.content .message-input .wrap input {
+ .message-input .wrap input {
   font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
   float: left;
   border-radius: 30px;
@@ -101,14 +105,14 @@
   margin-bottom: 10px;
 
 }
-.content .message-input .wrap input {
+ .message-input .wrap input {
   padding: 15px 32px 16px 8px;
 }
-.content .message-input .wrap input:focus{
+ .message-input .wrap input:focus{
   outline: none;
 }
 
-.content .message-input .wrap button {
+ .message-input .wrap button {
   border-radius: 50%;
   cursor: pointer;
   background-color: #ae52d4;
@@ -116,7 +120,7 @@
   margin-left: 10px;
 }
 
-.content .message-input .wrap button:hover {
+ .message-input .wrap button:hover {
   background: cornflowerblue;
 }
 
