@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { WebSocketService } from 'src/app/services/web-socket.service';
 
 
 @Component({
@@ -7,10 +8,24 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./chat-list.component.css']
 })
 export class ChatListComponent implements OnInit {
+  currentUser
   @Output() chatClicked  = new EventEmitter<any>();
-  constructor() { }
+  constructor(private webSocketService: WebSocketService) { }
 
   ngOnInit() {
+    this.currentUser= JSON.parse(localStorage.getItem("user"));
+    this.webSocketService.emit("init",{userId: this.currentUser._id});
+    this.webSocketService.listen("chatList").subscribe((dataArray:any) => {
+
+    dataArray.forEach((data: any) => {
+      this.chats.push({
+        "id": this.currentUser._id==data.user1ID?data.user2ID:data.user1ID,
+        "name": this.currentUser._id==data.user1ID?data.user2Name:data.user1Name,
+        "messages": data.messages,
+        "imageUrl": "http://emilcarlsson.se/assets/mikeross.png"
+      })
+    });
+    })
   }
   chats=[
     // {

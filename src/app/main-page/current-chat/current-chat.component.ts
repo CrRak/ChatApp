@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewChecked } from '@angular/core';
+import { Component, OnInit,OnChanges, Input, AfterViewChecked } from '@angular/core';
 import { WebSocketService } from 'src/app/services/web-socket.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { WebSocketService } from 'src/app/services/web-socket.service';
   templateUrl: './current-chat.component.html',
   styleUrls: ['./current-chat.component.css']
 })
-export class CurrentChatComponent implements OnInit {
+export class CurrentChatComponent implements OnInit,OnChanges {
   @Input() chat;
   messageText
   currentUser
@@ -22,8 +22,21 @@ export class CurrentChatComponent implements OnInit {
         "message": data.message,
         "imageUrl": "http://emilcarlsson.se/assets/mikeross.png"
       })
-    })
+    });
   }
+  ngOnChanges(){
+    console.log(this.chat);
+
+    this.chat.messages.forEach((message) => {
+      this.msgs.push({
+        "status": this.currentUser._id == message.senderId ? "sent" : "received",
+        "message": message.content,
+        "imageUrl": "http://emilcarlsson.se/assets/mikeross.png"
+    });
+  })
+
+  }
+
   ngAfterViewChecked(){
     let container = document.getElementById("messageContainer");
     console.log("container")

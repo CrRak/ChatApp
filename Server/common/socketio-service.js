@@ -32,14 +32,22 @@ function initializeServerSocket(server_socket){
 
         // Adding user to online Users corresponding to the user ID.
         socket.on('init', async (data) => {
-            onlineUsers.push({[data.userId]: socket});
+            const i = onlineUsers.findIndex((elem) => {
+              return getSocketFromObject(elem) == socket;
+            });
+            if(i == -1)
+                onlineUsers.push({[data.userId]: socket});
+            else{
+                // console.log(onlineUsers);
+                onlineUsers[i][data.userId] = socket;
+                console.log(`- Socket updated for userId ${data.userId}`)
+            }
             console.log(`- User with socketid ${socket.id} has connected. ${onlineUsers.length} Users online.`);
             try{
                 var userChats = await getConversationsForUser(data.userId);
             }catch (e){
                 console.log(`---- Error occured in fetching conversations from database in socketio-service : ${e}`)
             }
-            
 
             // Emit conversation list for the particular user
             console.log(`-- Got ${userChats.length} conversations for user id ${data.userId}`);
@@ -51,6 +59,7 @@ function initializeServerSocket(server_socket){
 
             // Find the user socket for the user message was sent to.
             const user_and_socket = onlineUsers.find((user_socket) => {
+              console.log(`## ${Object.keys(user_socket)}`);
                 return getUserFromObject(user_socket) == data.toUserId;
             });
 

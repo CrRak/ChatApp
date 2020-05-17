@@ -5,12 +5,12 @@
         <img src="{{chat.imageUrl}}" alt="" />
         <div class="meta">
           <p class="name">{{chat.name}}</p>
-          <p class="preview">{{chat.message}}</p>
+          <p class="preview">{{chat.messages[chat.messages.length-1].content}}</p>
         </div>
       </div>
     </div>
-    <div *ngIf="chats.length==0" style="padding-top: 150px;">
+    <div *ngIf="chats.length==0" style="padding-top: 200px; ">
 
-      <p style="text-align: center;"> No chats to display </p>
+      <p style="text-align: center; opacity: 50%;"> No chats to display </p>
     </div>
 </div>
