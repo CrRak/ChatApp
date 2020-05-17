@@ -22,8 +22,6 @@ function initializeServerSocket(server_socket){
 
     // Listen for socket connection event
     io.on('connection', (socket) => {
-        console.log(`- User with socketid ${socket.id} has connected. ${onlineUsers.length} Users online.`);
-
         socket.on('disconnect', () => {
             console.log(`- User with socketid ${socket.id} disconnected.`);
             const i = onlineUsers.findIndex((elem) => {
@@ -33,9 +31,19 @@ function initializeServerSocket(server_socket){
         });
 
         // Adding user to online Users corresponding to the user ID.
-        socket.on('init', (data) => {
+        socket.on('init', async (data) => {
             onlineUsers.push({[data.userId]: socket});
-            console.log(onlineUsers)
+            console.log(`- User with socketid ${socket.id} has connected. ${onlineUsers.length} Users online.`);
+            try{
+                var userChats = await getConversationsForUser(data.userId);
+            }catch (e){
+                console.log(`---- Error occured in fetching conversations from database in socketio-service : ${e}`)
+            }
+            
+
+            // Emit conversation list for the particular user
+            console.log(`-- Got ${userChats.length} conversations for user id ${data.userId}`);
+            socket.emit('chatList', userChats);
         })
 
         // Tackling incoming message from user
@@ -58,7 +66,7 @@ function initializeServerSocket(server_socket){
             } catch(e){
                 console.log(`---- Error occured in updating database in socketio-service : ${e}`)
             }
-            console.log(`-- Got Message from user with data : ${data}`);
+            console.log(`-- Got Message from user ${data.fromUserId} to user ${data.toUserId} with content : ${data.message}`);
         })
     });
 }
@@ -77,7 +85,11 @@ async function addChatMessageToDb(data){
             ]
         }, {$push: {messages: newMessage}, $setOnInsert: {
             user1ID: data.fromUserId,
-            user2ID: data.toUserId
+            user1Name: data.fromUserName,
+            user1Image: data.fromUserImage,
+            user2ID: data.toUserId,
+            user2Name: data.toUserName,
+            user2Image: data.toUserImage,
         }}, {upsert: true});
 }
 
@@ -89,9 +101,16 @@ function formatMessageForDb(senderId, message){
     };
 }
 
+async function getConversationsForUser(userId){
+    return await dbclient.db('test')
+            .collection('chatInfo')
+            .find({
+                $or: [{ user1ID: userId }, { user2ID: userId }]
+            }).toArray();
+}
+
 
 
 module.exports = {
     initializeServerSocket,
-    addChatMessageToDb
 }

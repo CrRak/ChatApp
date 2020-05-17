@@ -14,7 +14,10 @@ socketio_service.initializeServerSocket(socketio);
 
 
 // Connect to MongoDB client
-dbclient.connect();
+dbclient.connect().then(async () => {
+    // ---------- This is only for testing socketio functionality, should be removed afterwords ----------
+    //console.log( await socketio_service.getConversationsForUser('uganda2'));
+});
 
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/ChatApp'));
