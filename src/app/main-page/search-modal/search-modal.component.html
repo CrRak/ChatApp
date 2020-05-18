@@ -1,0 +1,24 @@
+<div class="container">
+
+  <!-- Trigger the modal with a button -->
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="mySearchModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body" *ngFor="let user of users">
+
+          <img *ngIf="user.image" class="modal-image" src='{{user.image}}' /><br><span><h4 class="modal-title">{{user.name}}</h4></span>
+          <img *ngIf="!user.image" class="modal-image" src='http://emilcarlsson.se/assets/louislitt.png'/> <br>
+          <p style="float: right;"> start a conversation </p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

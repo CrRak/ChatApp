@@ -12,6 +12,8 @@ import { UserProfileComponent } from './main-page/user-profile/user-profile.comp
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule} from '@angular/forms';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { SearchModalComponent } from './main-page/search-modal/search-modal.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +24,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     CurrentChatComponent,
     CurrentUserComponent,
     UserProfileComponent,
+    SearchModalComponent,
+
 
   ],
   imports: [
