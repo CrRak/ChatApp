@@ -8,7 +8,7 @@
         <a href="#" data-toggle="modal" data-target="#myModal"><app-current-user></app-current-user></a>
       </div>
       <div class="row">
-        <app-chat-list (chatClicked)="childChatClicked($event)" style="height:400px !important;"></app-chat-list>
+        <app-chat-list (chatClicked)="childChatClicked($event)" [searchedUser]="clickedUser" style="height:400px !important;"></app-chat-list>
       </div>
     </div>
     <div class="col-9">
@@ -21,4 +21,4 @@
   </div>
 </div>
 <app-user-profile></app-user-profile>
-<app-search-modal></app-search-modal>
+<app-search-modal (searchChat)="childSearchChatClicked($event)"></app-search-modal>

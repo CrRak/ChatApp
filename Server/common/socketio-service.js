@@ -81,6 +81,8 @@ function initializeServerSocket(server_socket){
 
         // Tackling search for users
         socket.on('search', async (data) => {
+
+          console.log(data);
             try{
                 // Gets users from database.
                 const results = await getUsersForSearchParameter(data);
@@ -89,7 +91,7 @@ function initializeServerSocket(server_socket){
             } catch(e){
                 console.log(`---- Error occured in querying database in socketio-service : ${e}`)
             }
-        
+
         });
     });
 }

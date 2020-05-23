@@ -6,20 +6,21 @@
   <!-- Modal -->
   <div class="modal fade" id="mySearchModal" role="dialog">
     <div class="modal-dialog">
-
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-body" >
+          <button id="dismissModal" data-dismiss="mySearchModal"></button>
           <div class="card" *ngFor="let user of users" >
 
             <div class="search-result">
               <div class ="row">
               <div class="col-md-2" >
+                <input type="hidden" value={{user._id}}>
                 <img *ngIf="user.image" class="modal-image" src='{{user.image}}' />
                 <img *ngIf="!user.image" class="modal-image" src='http://emilcarlsson.se/assets/louislitt.png'/>
               </div>
               <div class="col-md-8" style="padding-left: 30px;" ><h3><span><a class="modal-title">{{user.name}}</a></span></h3>
-              <a href="#" class="search-link" >start a conversation</a>
+              <span class="search-link" (click)="startConversation(user)" >start a conversation</span>
               </div>
 
               </div>

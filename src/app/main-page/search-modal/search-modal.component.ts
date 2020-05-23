@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output , EventEmitter} from '@angular/core';
+import { WebSocketService } from 'src/app/services/web-socket.service';
+
 
 @Component({
   selector: 'app-search-modal',
@@ -6,20 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-modal.component.css']
 })
 export class SearchModalComponent implements OnInit {
-  users=[
-    {
-      "name": "Rakshita",
-      "image": "http://emilcarlsson.se/assets/donnapaulsen.png"
-    },
-    {
-      "name": "Prakhar",
-      "image": "http://emilcarlsson.se/assets/harveyspecter.png"
-    }
+  users: any=[
+
   ]
-  constructor() { }
+  @Output() searchChat  = new EventEmitter<any>();
+  constructor(private webSocketService: WebSocketService) { }
 
   ngOnInit() {
-    console.log(this.users);
+    this.webSocketService.listen("searchResults").subscribe((dataArray:any) => {
+      this.users = dataArray;
+    })
+  }
+  startConversation(user){
+    this.searchChat.emit(user);
   }
 
 }

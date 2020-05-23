@@ -39,13 +39,14 @@ export class CurrentChatComponent implements OnInit,OnChanges {
   ngOnChanges(){
     console.log(this.chat);
 
-    this.chat.messages.forEach((message) => {
+    if(this.chat){this.chat.messages.forEach((message) => {
       this.msgs.push({
         "status": this.currentUser._id == message.senderId ? "sent" : "received",
         "message": message.content,
         "imageUrl": "http://emilcarlsson.se/assets/mikeross.png"
     });
   })
+  }
 
   }
 

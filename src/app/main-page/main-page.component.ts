@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class MainPageComponent implements OnInit {
 
   public clickedChat: any;
+  public clickedUser:any;
   constructor() { }
 
   ngOnInit() {
@@ -16,6 +17,9 @@ export class MainPageComponent implements OnInit {
   childChatClicked(chat){
     this.clickedChat= chat;
 
+  }
+  childSearchChatClicked(user){
+    this.clickedUser=user;
   }
 
 }
