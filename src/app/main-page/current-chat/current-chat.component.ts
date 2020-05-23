@@ -23,6 +23,18 @@ export class CurrentChatComponent implements OnInit,OnChanges {
         "imageUrl": "http://emilcarlsson.se/assets/mikeross.png"
       })
     });
+    var input = document.getElementById("msgText");
+    // Execute a function when the user releases a key on the keyboard
+    input.addEventListener("keyup", function(event) {
+      // Number 13 is the "Enter" key on the keyboard
+      if (event.keyCode === 13) {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        document.getElementById("sendMsg").click();
+      }
+    });
+
   }
   ngOnChanges(){
     console.log(this.chat);
@@ -43,7 +55,7 @@ export class CurrentChatComponent implements OnInit,OnChanges {
     container.scrollTop = container.scrollHeight;
   }
   sendMessage(){
-    console.log(this.chat.id)
+    if(this.chat){
     this.webSocketService.emit("message", {
       fromUserName: this.currentUser.name,
       fromUserImage: this.currentUser.image,
@@ -53,27 +65,14 @@ export class CurrentChatComponent implements OnInit,OnChanges {
       toUserId: this.chat.id,
       message: this.messageText
     })
-
-
-    var input = document.getElementById("msgText");
-    // Execute a function when the user releases a key on the keyboard
-    input.addEventListener("keyup", function(event) {
-      // Number 13 is the "Enter" key on the keyboard
-      if (event.keyCode === 13) {
-        // Cancel the default action, if needed
-        event.preventDefault();
-        // Trigger the button element with a click
-        document.getElementById("sendMsg").click();
-      }
-    });
-
-
     this.msgs.push({
       "status":"sent",
       "message": this.messageText,
       "imageUrl": "http://emilcarlsson.se/assets/harveyspecter.png"
     })
     this.messageText=''
+  }
+
   }
 
   msgs: any=[

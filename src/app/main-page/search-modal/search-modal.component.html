@@ -10,13 +10,28 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-body" >
-          <div *ngFor="let user of users">
-            <img *ngIf="user.image" class="modal-image" src='{{user.image}}' /><br><span><h4 class="modal-title">{{user.name}}</h4></span>
-            <img *ngIf="!user.image" class="modal-image" src='http://emilcarlsson.se/assets/louislitt.png'/> <br>
-            <p style="float: right;"> start a conversation </p>
-        </div>
-        </div>
+          <div class="card" *ngFor="let user of users" >
 
+            <div class="search-result">
+              <div class ="row">
+              <div class="col-md-2" >
+                <img *ngIf="user.image" class="modal-image" src='{{user.image}}' />
+                <img *ngIf="!user.image" class="modal-image" src='http://emilcarlsson.se/assets/louislitt.png'/>
+              </div>
+              <div class="col-md-8" style="padding-left: 30px;" ><h3><span><a class="modal-title">{{user.name}}</a></span></h3>
+              <a href="#" class="search-link" >start a conversation</a>
+              </div>
+
+              </div>
+            </div>
+
+
+
+          <!-- <img *ngIf="user.image" class="modal-image" src='{{user.image}}' /><br><span><h4 class="modal-title">{{user.name}}</h4></span>
+          <img *ngIf="!user.image" class="modal-image" src='http://emilcarlsson.se/assets/louislitt.png'/> <br>
+          <p style="float: right;"> start a conversation </p> -->
+        </div>
+      </div>
       </div>
 
     </div>
