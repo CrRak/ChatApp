@@ -9,11 +9,12 @@
 
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-body" *ngFor="let user of users">
-
-          <img *ngIf="user.image" class="modal-image" src='{{user.image}}' /><br><span><h4 class="modal-title">{{user.name}}</h4></span>
-          <img *ngIf="!user.image" class="modal-image" src='http://emilcarlsson.se/assets/louislitt.png'/> <br>
-          <p style="float: right;"> start a conversation </p>
+        <div class="modal-body" >
+          <div *ngFor="let user of users">
+            <img *ngIf="user.image" class="modal-image" src='{{user.image}}' /><br><span><h4 class="modal-title">{{user.name}}</h4></span>
+            <img *ngIf="!user.image" class="modal-image" src='http://emilcarlsson.se/assets/louislitt.png'/> <br>
+            <p style="float: right;"> start a conversation </p>
+        </div>
         </div>
 
       </div>

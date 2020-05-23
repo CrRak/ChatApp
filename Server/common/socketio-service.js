@@ -76,7 +76,21 @@ function initializeServerSocket(server_socket){
                 console.log(`---- Error occured in updating database in socketio-service : ${e}`)
             }
             console.log(`-- Got Message from user ${data.fromUserId} to user ${data.toUserId} with content : ${data.message}`);
-        })
+        });
+
+
+        // Tackling search for users
+        socket.on('search', async (data) => {
+            try{
+                // Gets users from database.
+                const results = await getUsersForSearchParameter(data);
+                socket.emit('searchResults', results);
+                console.log(`-- Got ${results.length} Search results from the database.`);
+            } catch(e){
+                console.log(`---- Error occured in querying database in socketio-service : ${e}`)
+            }
+        
+        });
     });
 }
 
@@ -118,6 +132,13 @@ async function getConversationsForUser(userId){
             }).toArray();
 }
 
+async function getUsersForSearchParameter(filter){
+    return await dbclient.db('test')
+            .collection('userInfo')
+            .find({
+                name : {$regex: filter, $options: "i"}
+            }).toArray();
+}
 
 
 module.exports = {
