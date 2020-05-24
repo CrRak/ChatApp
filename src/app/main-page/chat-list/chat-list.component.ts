@@ -16,7 +16,9 @@ export class ChatListComponent implements OnInit,OnChanges {
   previousSearchedUser;
   gotArray = false;
   constructor(private webSocketService: WebSocketService) {
+    console.log(localStorage.getItem("user"));
     this.currentUser= JSON.parse(localStorage.getItem("user"));
+
     this.webSocketService.emit("init",{userId: this.currentUser._id});
     this.webSocketService.listen("chatList").subscribe((dataArray:any) => {
         console.log(dataArray);
@@ -35,7 +37,9 @@ export class ChatListComponent implements OnInit,OnChanges {
    }
 
   ngOnInit() {
-
+    const pos = jQuery(document).height() - jQuery(':host').position().top;
+    alert(pos);
+    jQuery(':host').css('max-height', `${pos}px !important;`)
   }
 
   ngOnChanges(){

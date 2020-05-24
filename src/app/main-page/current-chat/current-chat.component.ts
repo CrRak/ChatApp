@@ -22,6 +22,11 @@ export class CurrentChatComponent implements OnInit,OnChanges {
         "message": data.message,
         "imageUrl": "http://emilcarlsson.se/assets/mikeross.png"
       })
+      this.chat.messages.push({
+        "senderId":this.currentUser._id,
+        "timestamp":new Date(),
+        "content": data.message,
+      })
     });
     var input = document.getElementById("msgText");
     // Execute a function when the user releases a key on the keyboard
@@ -39,7 +44,9 @@ export class CurrentChatComponent implements OnInit,OnChanges {
   ngOnChanges(){
     console.log(this.chat);
 
-    if(this.chat){this.chat.messages.forEach((message) => {
+    if(this.chat){
+      this.msgs = [];
+      this.chat.messages.forEach((message) => {
       this.msgs.push({
         "status": this.currentUser._id == message.senderId ? "sent" : "received",
         "message": message.content,
@@ -70,6 +77,12 @@ export class CurrentChatComponent implements OnInit,OnChanges {
       "status":"sent",
       "message": this.messageText,
       "imageUrl": "http://emilcarlsson.se/assets/harveyspecter.png"
+    })
+
+    this.chat.messages.push({
+      "senderId":this.currentUser._id,
+      "timestamp":new Date(),
+      "content": this.messageText,
     })
     this.messageText=''
   }

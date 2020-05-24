@@ -40,7 +40,9 @@ onLoginSubmit(form: NgForm) {
 onRegisterSubmit(form: NgForm) {
   this.http.post('http://localhost:8080/register', {"user":form.value}).subscribe((data:any)=>{
     if(data.success==true){
-      alert(data);
+      console.log(data);
+      data.user = form.value;
+      data.user._id = data.insertedId;
       localStorage.setItem("user", JSON.stringify(data.user))
       this.route.navigate(['/home']);
     }

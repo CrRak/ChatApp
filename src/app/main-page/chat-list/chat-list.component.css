@@ -1,13 +1,9 @@
 :host{
   width: 100% !important;
-}
-
-html{
-  overflow-y: hidden;
+  max-height: 200px !important;
 }
 
 #contacts{
-  overflow-y: scroll;
   width: 100%;
 }
 
