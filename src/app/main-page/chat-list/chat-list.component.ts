@@ -34,6 +34,17 @@ export class ChatListComponent implements OnInit,OnChanges,AfterViewInit {
         this.gotArray = true;
       }
     });
+
+    webSocketService.listen("userConnectedOnServer").subscribe((data) => {
+      const i= this.chats.findIndex((chat) => {
+        return chat.id == data;
+      });
+      if( i!= -1){
+        this.chats[i].active = true;
+      }
+    })
+
+
    }
 
   ngOnInit() {

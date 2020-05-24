@@ -27,6 +27,11 @@ function initializeServerSocket(server_socket){
             const i = onlineUsers.findIndex((elem) => {
                 return getSocketFromObject(elem) == socket;
             });
+
+            if( i != -1 ){
+              io.emit('userDisconnectedFromServer', getUserFromObject(onlineUsers[i]));
+            }
+
             onlineUsers.splice(i, 1);
         });
 
@@ -35,8 +40,11 @@ function initializeServerSocket(server_socket){
             const i = onlineUsers.findIndex((elem) => {
               return getSocketFromObject(elem) == socket;
             });
-            if(i == -1)
+
+            if(i == -1){
                 onlineUsers.push({[data.userId]: socket});
+                io.emit('userConnectedOnServer', data.userId);
+            }
             else{
                 // console.log(onlineUsers);
                 onlineUsers[i][data.userId] = socket;
@@ -45,6 +53,17 @@ function initializeServerSocket(server_socket){
             console.log(`- User with socketid ${socket.id} has connected. ${onlineUsers.length} Users online.`);
             try{
                 var userChats = await getConversationsForUser(data.userId);
+
+                // Set active if user online
+                for(let i = 0; i < userChats.length; i++){
+                  const k = onlineUsers.findIndex((user) =>{
+                    return userChats[i].user1ID == getUserFromObject(user) || userChats[i].user2ID == getUserFromObject(user)
+                  })
+
+                  if(k!=-1){
+                    userChats[i].active = true;
+                  }
+                }
             }catch (e){
                 console.log(`---- Error occured in fetching conversations from database in socketio-service : ${e}`)
             }
@@ -105,6 +124,7 @@ function initializeServerSocket(server_socket){
             console.log('---- Error occured while updating image in database ' + e);
           }
         });
+
     });
 }
 
@@ -170,7 +190,7 @@ async function updateImageUrlAsBase64(data){
         }, {
             $set : {user1Image: data.image}
         });
-        
+
         await dbclient.db('test')
         .collection('chatInfo')
         .updateOne({
