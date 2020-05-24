@@ -93,6 +93,16 @@ function initializeServerSocket(server_socket){
             }
 
         });
+
+
+        // Tackling Image change from user
+        socket.on('uploadedImage', async (data) =>{
+          try{
+            socket.emit('imageListener', data);
+          }catch(e){
+
+          }
+        });
     });
 }
 

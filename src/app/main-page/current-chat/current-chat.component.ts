@@ -20,7 +20,7 @@ export class CurrentChatComponent implements OnInit,OnChanges {
       this.msgs.push({
         "status":"received",
         "message": data.message,
-        "imageUrl": "http://emilcarlsson.se/assets/mikeross.png"
+        "imageUrl": data.imageUrl==null?"http://emilcarlsson.se/assets/mikeross.png":data.imageUrl,
       })
       this.chat.messages.push({
         "senderId":this.currentUser._id,
@@ -50,7 +50,7 @@ export class CurrentChatComponent implements OnInit,OnChanges {
       this.msgs.push({
         "status": this.currentUser._id == message.senderId ? "sent" : "received",
         "message": message.content,
-        "imageUrl": "http://emilcarlsson.se/assets/mikeross.png"
+        "imageUrl": this.currentUser._id == message.senderId ? (this.currentUser.image==null?"http://emilcarlsson.se/assets/harveyspecter.png":this.currentUser.image) : (this.chat.imageUrl==null?"http://emilcarlsson.se/assets/mikeross.png":this.chat.imageUrl),
     });
   })
   }
@@ -76,7 +76,7 @@ export class CurrentChatComponent implements OnInit,OnChanges {
     this.msgs.push({
       "status":"sent",
       "message": this.messageText,
-      "imageUrl": "http://emilcarlsson.se/assets/harveyspecter.png"
+      "imageUrl": this.currentUser.image==null?"http://emilcarlsson.se/assets/harveyspecter.png":this.currentUser.image,
     })
 
     this.chat.messages.push({

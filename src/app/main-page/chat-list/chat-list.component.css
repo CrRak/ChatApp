@@ -1,6 +1,7 @@
 :host{
   width: 100% !important;
-  max-height: 200px !important;
+  max-height: fill-available !important;
+  overflow: scroll;
 }
 
 #contacts{

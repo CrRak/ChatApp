@@ -13,8 +13,11 @@
           <h4 class="modal-title">{{currentUser.name}}</h4>
         </div>
         <div class="modal-body">
-          <img *ngIf="currentUser.image" class="modal-image" src='{{currentUser.image}}' /><br>
-          <img *ngIf="!currentUser.image" class="modal-image" src='http://emilcarlsson.se/assets/louislitt.png'/><br>
+
+          <input type="file"  accept="image/*" (change)=onSelectedFile($event)>
+            <img *ngIf="currentUser.image" class="modal-image" src='{{currentUser.image}}' /><br>
+            <img *ngIf="!currentUser.image" class="modal-image" src='http://emilcarlsson.se/assets/louislitt.png'/><br>
+
           <p *ngIf="currentUser.status" class="modal-description">{{currentUser.status}}</p>
           <p *ngIf="!currentUser.status"> Hello there, I am using ChatApp </p>
           <p class="modal-emailID">Email ID: {{currentUser.email}}</p>

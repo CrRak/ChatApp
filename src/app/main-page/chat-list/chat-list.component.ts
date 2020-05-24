@@ -28,7 +28,7 @@ export class ChatListComponent implements OnInit,OnChanges {
             "id": this.currentUser._id==data.user1ID?data.user2ID:data.user1ID,
             "name": this.currentUser._id==data.user1ID?data.user2Name:data.user1Name,
             "messages": data.messages,
-            "imageUrl": "http://emilcarlsson.se/assets/mikeross.png"
+            "imageUrl": data.imageUrl==null?"http://emilcarlsson.se/assets/mikeross.png":data.imageUrl,
           })
         });
         this.gotArray = true;
@@ -37,9 +37,8 @@ export class ChatListComponent implements OnInit,OnChanges {
    }
 
   ngOnInit() {
-    const pos = jQuery(document).height() - jQuery(':host').position().top;
-    alert(pos);
-    jQuery(':host').css('max-height', `${pos}px !important;`)
+    const pos = jQuery(document).height() - jQuery('#contacts').offset().top;
+
   }
 
   ngOnChanges(){

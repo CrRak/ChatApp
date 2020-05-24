@@ -14,6 +14,7 @@ import { FormsModule} from '@angular/forms';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { SearchModalComponent } from './main-page/search-modal/search-modal.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
