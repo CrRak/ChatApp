@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges, AfterViewInit } from '@angular/core';
 import { WebSocketService } from 'src/app/services/web-socket.service';
 
 declare var jQuery: any;
@@ -8,7 +8,7 @@ declare var jQuery: any;
   templateUrl: './chat-list.component.html',
   styleUrls: ['./chat-list.component.css']
 })
-export class ChatListComponent implements OnInit,OnChanges {
+export class ChatListComponent implements OnInit,OnChanges,AfterViewInit {
   currentUser
   @Output() chatClicked  = new EventEmitter<any>();
   @Input() searchedUser;
@@ -37,8 +37,12 @@ export class ChatListComponent implements OnInit,OnChanges {
    }
 
   ngOnInit() {
-    const pos = jQuery(document).height() - jQuery('#contacts').offset().top;
+  }
 
+  ngAfterViewInit(){
+    console.log(jQuery('.overflowy'));
+    const pos = jQuery(document).height() - jQuery('#contacts').offset().top;
+    jQuery('.overflowy').height(pos);
   }
 
   ngOnChanges(){

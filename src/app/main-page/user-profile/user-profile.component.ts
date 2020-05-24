@@ -28,7 +28,7 @@ export class UserProfileComponent implements OnInit {
   async onSelectedFile(event){
     this.selectedFile= event.target.files[0];
     console.log(this.selectedFile);
-    this.webSocketService.emit("uploadedImage",await this.toBase64(this.selectedFile));
+    this.webSocketService.emit("uploadedImage", {userId: this.currentUser._id, image:  await this.toBase64(this.selectedFile)});
   }
 
   toBase64 = file => new Promise((resolve, reject) => {

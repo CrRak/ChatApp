@@ -98,9 +98,11 @@ function initializeServerSocket(server_socket){
         // Tackling Image change from user
         socket.on('uploadedImage', async (data) =>{
           try{
-            socket.emit('imageListener', data);
+            await updateImageUrlAsBase64(data);
+            socket.emit('imageListener', data.image);
+            console.log('-- Updated userImage for all instances of userId ' + data.userId);
           }catch(e){
-
+            console.log('---- Error occured while updating image in database ' + e);
           }
         });
     });
@@ -151,6 +153,33 @@ async function getUsersForSearchParameter(filter){
                 name : {$regex: filter, $options: "i"}
             }).toArray();
 }
+
+async function updateImageUrlAsBase64(data){
+        await dbclient.db('test')
+            .collection('userInfo')
+            .updateOne({
+                _id : data.userId
+            }, {
+                $set : {image: data.image}
+            });
+
+        await dbclient.db('test')
+        .collection('chatInfo')
+        .updateOne({
+            user1ID : data.userId
+        }, {
+            $set : {user1Image: data.image}
+        });
+        
+        await dbclient.db('test')
+        .collection('chatInfo')
+        .updateOne({
+            user2ID  : data.userId
+        }, {
+            $set : {user2Image: data.image}
+        });
+}
+
 
 
 module.exports = {
