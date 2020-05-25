@@ -57,11 +57,15 @@ function initializeServerSocket(server_socket){
                 // Set active if user online
                 for(let i = 0; i < userChats.length; i++){
                   const k = onlineUsers.findIndex((user) =>{
-                    return userChats[i].user1ID == getUserFromObject(user) || userChats[i].user2ID == getUserFromObject(user)
+                      const onlineUserId = getUserFromObject(user);
+                    return (userChats[i].user1ID ==  onlineUserId && data.userId != onlineUserId) 
+                            || (userChats[i].user2ID == onlineUserId && data.userId  != onlineUserId);
                   })
 
                   if(k!=-1){
                     userChats[i].active = true;
+                  }else{
+                      userChats[i].active = false;
                   }
                 }
             }catch (e){

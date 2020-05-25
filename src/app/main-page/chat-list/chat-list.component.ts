@@ -23,12 +23,14 @@ export class ChatListComponent implements OnInit,OnChanges,AfterViewInit {
     this.webSocketService.listen("chatList").subscribe((dataArray:any) => {
         console.log(dataArray);
      if(!this.gotArray) {
+       console.log(dataArray);
         dataArray.forEach((data: any) => {
           this.chats.push({
             "id": this.currentUser._id==data.user1ID?data.user2ID:data.user1ID,
             "name": this.currentUser._id==data.user1ID?data.user2Name:data.user1Name,
             "messages": data.messages,
             "imageUrl": data.imageUrl==null?"http://emilcarlsson.se/assets/mikeross.png":data.imageUrl,
+            "active": data.active
           })
         });
         this.gotArray = true;
@@ -41,6 +43,16 @@ export class ChatListComponent implements OnInit,OnChanges,AfterViewInit {
       });
       if( i!= -1){
         this.chats[i].active = true;
+      }
+    })
+
+    
+    webSocketService.listen("userDisconnectedFromServer").subscribe((data) => {
+      const i= this.chats.findIndex((chat) => {
+        return chat.id == data;
+      });
+      if( i!= -1){
+        this.chats[i].active = false;
       }
     })
 
