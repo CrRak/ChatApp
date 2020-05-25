@@ -11,6 +11,8 @@ declare var jQuery: any;
 export class ChatListComponent implements OnInit,OnChanges,AfterViewInit {
   currentUser
   @Output() chatClicked  = new EventEmitter<any>();
+
+  selectedChat;
   @Input() searchedUser;
   chats=[];
   previousSearchedUser;
@@ -100,6 +102,7 @@ export class ChatListComponent implements OnInit,OnChanges,AfterViewInit {
   }
 
   openThisChat(chat){
+    this.selectedChat = chat;
     this.chatClicked.emit(chat);
 
   }

@@ -11,7 +11,7 @@ currentUser
 
 
     socket : any;
-    readonly url: string ="http://localhost:8080";
+    readonly url: string ="/";
 
     constructor(){
       this.socket = io(this.url);

@@ -33,9 +33,10 @@ div div.contact:hover {
   background: #9fa8da;
 }
 
-div div.contact.active {
-  background: #32465a;
-  border-right: 5px solid #435f7a;
+
+.active {
+  background: #b7b7cc;
+
 
 }
 
@@ -91,10 +92,8 @@ font-weight: 400;
 white-space: inherit;
 overflow: hidden;
 text-overflow: ellipsis;
--moz-transition: 1s all ease;
--o-transition: 1s all ease;
--webkit-transition: 1s all ease;
-transition: 1s all ease;
+
+
 }
  div div.contact .wrap .meta .preview span {
 position: initial;
