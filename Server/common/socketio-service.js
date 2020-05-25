@@ -1,6 +1,6 @@
 let io = undefined;
 const dbclient = require('./dbclient').client;
-
+const ObjectId = require('mongodb').ObjectId
 // Stores all users in {userId: socket} format
 const onlineUsers = [];
 
@@ -58,7 +58,7 @@ function initializeServerSocket(server_socket){
                 for(let i = 0; i < userChats.length; i++){
                   const k = onlineUsers.findIndex((user) =>{
                       const onlineUserId = getUserFromObject(user);
-                    return (userChats[i].user1ID ==  onlineUserId && data.userId != onlineUserId) 
+                    return (userChats[i].user1ID ==  onlineUserId && data.userId != onlineUserId)
                             || (userChats[i].user2ID == onlineUserId && data.userId  != onlineUserId);
                   })
 
@@ -182,7 +182,7 @@ async function updateImageUrlAsBase64(data){
         await dbclient.db('test')
             .collection('userInfo')
             .updateOne({
-                _id : data.userId
+                _id : new ObjectId(data.userId)
             }, {
                 $set : {image: data.image}
             });

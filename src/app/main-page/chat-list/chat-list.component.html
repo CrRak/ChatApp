@@ -2,8 +2,8 @@
     <div class="contact" [id]="chat.id" *ngFor="let chat of chats" (click)="openThisChat(chat)">
       <div class="wrap">
         <span class="contact-status" [ngClass]="{'online':chat.active}"></span>
-        <img *ngIf="chat.imageUrl!='null'" src="{{chat.imageUrl}}" alt="" />
-        <img *ngIf="chat.imageUrl== 'null'" src="http://emilcarlsson.se/assets/jessicapearson.png" alt="" />
+        <img *ngIf="chat.imageUrl" src="{{chat.imageUrl}}" alt="" />
+        <img *ngIf="!chat.imageUrl" src="http://emilcarlsson.se/assets/rachelzane.png" alt="" />
         <div class="meta">
           <p class="name">{{chat.name}}</p>
           <p class="preview">{{chat.messages[chat.messages.length-1]?.content}}</p>

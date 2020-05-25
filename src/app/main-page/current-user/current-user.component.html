@@ -1,0 +1,12 @@
+<div class="row">
+
+  <div class="col">
+    <img  *ngIf="currentUser.image" [src]="currentUser.image"  />
+    <img  *ngIf="!currentUser.image" src="http://emilcarlsson.se/assets/louislitt.png"  />
+
+  </div>
+  <div class="col">
+    <h4 > {{currentUser.name}}</h4>
+  </div>
+
+</div>

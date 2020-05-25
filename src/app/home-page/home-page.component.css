@@ -7,3 +7,16 @@ em{
   color: #E05C65;
   padding-left: 10px;
 }
+img{
+  width: 170px;
+  margin-top: -20px;
+}
+
+h1{
+  text-shadow: 0 0 6px rgb(5, 194, 201), 0 0 6px #0000FF;
+}
+label{
+  color: #140555;
+  font-style: oblique;
+
+}

@@ -1,6 +1,6 @@
 
 :host{
-  width: 100%;  
+  width: 100%;
   overflow-x: hidden;
 }
 .content {
@@ -10,6 +10,7 @@
   overflow: hidden;
   position: relative;
   min-width: 300px !important;
+  padding-right: 38px;
 
 }
 
@@ -56,7 +57,7 @@
 }
 .content .messages ul li.received p {
 
-  background: #ae52d4;
+  background: #3949ab;
   color: #f5f5f5;
 }
 .content .messages ul li.sent img {
@@ -116,7 +117,7 @@
  .message-input .wrap button {
   border-radius: 50%;
   cursor: pointer;
-  background-color: #ae52d4;
+  background-color: #3949ab;
   margin-top: 10px;
   margin-left: 10px;
 }

@@ -2,9 +2,12 @@
   font-weight: bold;
   margin-left: 150px;
   font-size: 30px;
+  color:  #140555;
 }
 .modal-image{
   border-radius: 50%;
+  border-color: indigo;
+  border-width: 20px;
   width: 50%;
   margin-left: 115px;
 }
@@ -16,6 +19,7 @@
   color: cornflowerblue;
 }
 .modal-emailId{
+  text-align: center;
   color: cornflowerblue;
 
 }

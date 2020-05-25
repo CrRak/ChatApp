@@ -17,6 +17,7 @@
 
 #contacts{
   width: 100%;
+
 }
 
 div div.contact {
@@ -29,7 +30,7 @@ div div.contact {
 }
 
 div div.contact:hover {
-  background: #b39ddb;
+  background: #9fa8da;
 }
 
 div div.contact.active {

@@ -29,7 +29,7 @@ export class ChatListComponent implements OnInit,OnChanges,AfterViewInit {
             "id": this.currentUser._id==data.user1ID?data.user2ID:data.user1ID,
             "name": this.currentUser._id==data.user1ID?data.user2Name:data.user1Name,
             "messages": data.messages,
-            "imageUrl": data.imageUrl==null?"http://emilcarlsson.se/assets/mikeross.png":data.imageUrl,
+            "imageUrl": this.currentUser._id==data.user1ID?data.user2Image:data.user1Image,
             "active": data.active
           })
         });
@@ -46,7 +46,7 @@ export class ChatListComponent implements OnInit,OnChanges,AfterViewInit {
       }
     })
 
-    
+
     webSocketService.listen("userDisconnectedFromServer").subscribe((data) => {
       const i= this.chats.findIndex((chat) => {
         return chat.id == data;
