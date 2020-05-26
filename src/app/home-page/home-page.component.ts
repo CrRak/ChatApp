@@ -23,7 +23,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit() {
   }
 onLoginSubmit(form: NgForm) {
-  this.http.post('http://localhost:8080/login', {"user":form.value}).subscribe((data:any)=>{
+  this.http.post('/login', {"user":form.value}).subscribe((data:any)=>{
     if(data.success==true){
 
       localStorage.setItem("user", JSON.stringify(data.user));
@@ -38,7 +38,7 @@ onLoginSubmit(form: NgForm) {
 
 }
 onRegisterSubmit(form: NgForm) {
-  this.http.post('http://localhost:8080/register', {"user":form.value}).subscribe((data:any)=>{
+  this.http.post('/register', {"user":form.value}).subscribe((data:any)=>{
     if(data.success==true){
       console.log(data);
       data.user = form.value;
