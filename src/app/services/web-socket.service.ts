@@ -11,11 +11,10 @@ currentUser
 
 
     socket : any;
-    readonly url: string ="/";
+    readonly url: string = '/';
 
     constructor(){
       this.socket = io(this.url);
-
     }
 
     listen(eventName: string){

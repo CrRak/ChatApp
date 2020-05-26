@@ -1,6 +1,9 @@
 let io = undefined;
 const dbclient = require('./dbclient').client;
-const ObjectId = require('mongodb').ObjectId
+const ObjectId = require('mongodb').ObjectId;
+
+require('dotenv').config()
+
 // Stores all users in {userId: socket} format
 const onlineUsers = [];
 
@@ -22,6 +25,7 @@ function initializeServerSocket(server_socket){
 
     // Listen for socket connection event
     io.on('connection', (socket) => {
+        console.log('connected');
         socket.on('disconnect', () => {
             console.log(`- User with socketid ${socket.id} disconnected.`);
             const i = onlineUsers.findIndex((elem) => {
@@ -137,7 +141,7 @@ async function addChatMessageToDb(data){
 
     // Inserts the new message into database for the conversation
     // Creates a new document if the conversation doesn't exist.
-    await dbclient.db('test')
+    await dbclient.db(process.env.database)
         .collection('chatInfo')
         .updateOne({
             $or: [
@@ -163,7 +167,7 @@ function formatMessageForDb(senderId, message){
 }
 
 async function getConversationsForUser(userId){
-    return await dbclient.db('test')
+    return await dbclient.db(process.env.database)
             .collection('chatInfo')
             .find({
                 $or: [{ user1ID: userId }, { user2ID: userId }]
@@ -171,7 +175,7 @@ async function getConversationsForUser(userId){
 }
 
 async function getUsersForSearchParameter(filter){
-    return await dbclient.db('test')
+    return await dbclient.db(process.env.database)
             .collection('userInfo')
             .find({
                 name : {$regex: filter, $options: "i"}
@@ -179,7 +183,7 @@ async function getUsersForSearchParameter(filter){
 }
 
 async function updateImageUrlAsBase64(data){
-        await dbclient.db('test')
+        await dbclient.db(process.env.database)
             .collection('userInfo')
             .updateOne({
                 _id : new ObjectId(data.userId)
@@ -187,7 +191,7 @@ async function updateImageUrlAsBase64(data){
                 $set : {image: data.image}
             });
 
-        await dbclient.db('test')
+        await dbclient.db(process.env.database)
         .collection('chatInfo')
         .updateOne({
             user1ID : data.userId
@@ -195,7 +199,7 @@ async function updateImageUrlAsBase64(data){
             $set : {user1Image: data.image}
         });
 
-        await dbclient.db('test')
+        await dbclient.db(process.env.database)
         .collection('chatInfo')
         .updateOne({
             user2ID  : data.userId
