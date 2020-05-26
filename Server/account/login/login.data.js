@@ -4,7 +4,7 @@ const client = require('../../common/dbclient').client;
 async function loginUser(user){
 
    try{
-        var result = await client.db("test").collection('userInfo').findOne({email: user.email, password: user.password});
+        var result = await client.db(process.env.database).collection('userInfo').findOne({email: user.email, password: user.password});
         if(result == null) return {result: ResponseCode.InvalidCredentials};
         else return {result: ResponseCode.Success, user: result};
  
